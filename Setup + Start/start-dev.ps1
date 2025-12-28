@@ -68,10 +68,10 @@ if (-not (Test-Path $frontendNodeModules)) {
 
 # Verify database connectivity (best-effort)
 if ($dbHost) {
-    Write-Host "Checking database connectivity to $dbHost:$dbPort ..." -ForegroundColor Yellow
+    Write-Host "Checking database connectivity to ${dbHost}:${dbPort} ..." -ForegroundColor Yellow
     $dbCheck = Test-NetConnection -ComputerName $dbHost -Port $dbPort -WarningAction SilentlyContinue
     if (-not $dbCheck.TcpTestSucceeded) {
-        Write-Host "Cannot reach database at $dbHost:$dbPort. Start Postgres or update DATABASE_URL." -ForegroundColor Red
+        Write-Host "Cannot reach database at ${dbHost}:${dbPort}. Start Postgres or update DATABASE_URL." -ForegroundColor Red
         exit 1
     }
     Write-Host "Database port reachable." -ForegroundColor Green
