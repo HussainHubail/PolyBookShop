@@ -20,8 +20,14 @@ try {
 
 # Check Backend .env
 $backendEnv = Join-Path $rootDir "Backend/.env"
+$backendEnvExample = Join-Path $rootDir "Backend/.env.example"
 if (-not (Test-Path $backendEnv)) {
-    Write-Host "Backend/.env is missing. Copy Backend/.env.example and set DATABASE_URL." -ForegroundColor Red
+    if (Test-Path $backendEnvExample) {
+        Copy-Item $backendEnvExample $backendEnv -Force
+        Write-Host "Backend/.env was missing. Created from Backend/.env.example. Set DATABASE_URL and other secrets, then rerun." -ForegroundColor Yellow
+    } else {
+        Write-Host "Backend/.env is missing and Backend/.env.example not found." -ForegroundColor Red
+    }
     exit 1
 }
 
