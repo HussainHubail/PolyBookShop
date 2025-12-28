@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management - Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span>
+                <span>LibraryMS</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="books.html" class="active">Books</a></li>
+                <li><a href="borrowing.html">Borrowing</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+            <div class="user-menu">
+                <span style="color: var(--gray-700); font-weight: 500;">Admin User</span>
+                <div class="user-avatar">AU</div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1 style="color: var(--gray-900);">Book Inventory</h1>
+            <button class="btn btn-primary">
+                <span>➕</span>
+                <span>Add New Book</span>
+            </button>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="card">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
+                <div class="form-group" style="margin: 0;">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="form-input" placeholder="Search by title, author, ISBN...">
+                    </div>
+                </div>
+                <div class="form-group" style="margin: 0;">
+                    <select class="form-select">
+                        <option>All Categories</option>
+                        <option>Fiction</option>
+                        <option>Non-Fiction</option>
+                        <option>Science</option>
+                        <option>History</option>
+                        <option>Biography</option>
+                        <option>Children</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin: 0;">
+                    <select class="form-select">
+                        <option>All Status</option>
+                        <option>Available</option>
+                        <option>Borrowed</option>
+                        <option>Reserved</option>
+                        <option>Damaged</option>
+                        <option>Lost</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Table -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Books (12,847 total)</h2>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-secondary btn-sm">
+                        <span>📥</span>
+                        <span>Import CSV</span>
+                    </button>
+                    <button class="btn btn-secondary btn-sm">
+                        <span>📤</span>
+                        <span>Export</span>
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cover</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>ISBN</th>
+                            <th>Category</th>
+                            <th>Total Copies</th>
+                            <th>Available</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">The Great Gatsby</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 1925</div>
+                            </td>
+                            <td>F. Scott Fitzgerald</td>
+                            <td>978-0-7432-7356-5</td>
+                            <td><span class="badge badge-info">Fiction</span></td>
+                            <td>8</td>
+                            <td>5</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">To Kill a Mockingbird</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 1960</div>
+                            </td>
+                            <td>Harper Lee</td>
+                            <td>978-0-06-112008-4</td>
+                            <td><span class="badge badge-info">Fiction</span></td>
+                            <td>12</td>
+                            <td>7</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">1984</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 1949</div>
+                            </td>
+                            <td>George Orwell</td>
+                            <td>978-0-452-28423-4</td>
+                            <td><span class="badge badge-info">Fiction</span></td>
+                            <td>10</td>
+                            <td>0</td>
+                            <td><span class="badge badge-danger">All Borrowed</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">Pride and Prejudice</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 1813</div>
+                            </td>
+                            <td>Jane Austen</td>
+                            <td>978-0-14-143951-8</td>
+                            <td><span class="badge badge-info">Fiction</span></td>
+                            <td>9</td>
+                            <td>6</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">The Catcher in the Rye</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 1951</div>
+                            </td>
+                            <td>J.D. Salinger</td>
+                            <td>978-0-316-76948-0</td>
+                            <td><span class="badge badge-info">Fiction</span></td>
+                            <td>7</td>
+                            <td>4</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">Sapiens</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 2011</div>
+                            </td>
+                            <td>Yuval Noah Harari</td>
+                            <td>978-0-062-31609-1</td>
+                            <td><span class="badge badge-gray">Non-Fiction</span></td>
+                            <td>15</td>
+                            <td>3</td>
+                            <td><span class="badge badge-warning">Low Stock</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">Harry Potter and the Sorcerer's Stone</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 1997</div>
+                            </td>
+                            <td>J.K. Rowling</td>
+                            <td>978-0-439-70818-8</td>
+                            <td><span class="badge badge-info">Fiction</span></td>
+                            <td>20</td>
+                            <td>12</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="width: 40px; height: 55px; background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">📖</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">The Hobbit</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Published: 1937</div>
+                            </td>
+                            <td>J.R.R. Tolkien</td>
+                            <td>978-0-547-92822-7</td>
+                            <td><span class="badge badge-info">Fiction</span></td>
+                            <td>11</td>
+                            <td>8</td>
+                            <td><span class="badge badge-success">Available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="Delete">🗑️</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div style="display: flex; justify-content: between; align-items: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+                <div style="color: var(--gray-600);">Showing 1-8 of 12,847 books</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary btn-sm">Previous</button>
+                    <button class="btn btn-primary btn-sm">1</button>
+                    <button class="btn btn-secondary btn-sm">2</button>
+                    <button class="btn btn-secondary btn-sm">3</button>
+                    <button class="btn btn-secondary btn-sm">...</button>
+                    <button class="btn btn-secondary btn-sm">1606</button>
+                    <button class="btn btn-secondary btn-sm">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

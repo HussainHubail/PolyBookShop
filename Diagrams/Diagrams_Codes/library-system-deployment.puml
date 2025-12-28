@@ -1,0 +1,46 @@
+@startuml
+!define RECTANGLE class
+
+title Polybookshop System Deployment Architecture
+
+package "Client Tier" {
+    [React Frontend] as Frontend
+    note right of Frontend
+        - Vite + TypeScript
+        - Tailwind CSS
+        - Zustand State Management
+        - React Router v6
+    end note
+}
+
+package "Application Tier" {
+    [Express Backend] as Backend
+    [JWT Auth] as Auth
+    [Rate Limiter] as RateLimit
+    
+    note right of Backend
+        - Node.js + TypeScript
+        - Prisma ORM
+        - Express.js Framework
+    end note
+}
+
+package "Data Tier" {
+    database "PostgreSQL\n(Neon Cloud)" as DB
+    [System Logs] as Logs
+}
+
+package "External Services" {
+    cloud "SMTP Email" as Email
+    folder "File Storage" as Files
+}
+
+Frontend -down-> Backend : REST API\n(JWT Tokens)
+Backend -right-> Auth
+Backend -right-> RateLimit
+Backend -down-> DB : Prisma ORM
+Backend -down-> Logs
+Backend -right-> Email : Notifications
+Backend -right-> Files : Uploads
+
+@enduml

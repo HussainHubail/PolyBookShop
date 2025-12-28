@@ -1,0 +1,318 @@
+// PolyBookShop - Prisma Schema
+// University Library Management System
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========================================
+// AUTHENTICATION & AUTHORIZATION
+// ========================================
+
+model Role {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique @db.VarChar(50) // "ADMIN", "LIBRARIAN", "MEMBER"
+  description String?    @db.VarChar(255)
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  
+  userRoles   UserRole[]
+
+  @@map("roles")
+}
+
+model User {
+  id                    Int       @id @default(autoincrement())
+  username              String    @unique @db.VarChar(100)
+  email                 String    @unique @db.VarChar(255)
+  passwordHash          String    @map("password_hash") @db.VarChar(255)
+  isActive              Boolean   @default(false) @map("is_active")
+  dateJoined            DateTime  @default(now()) @map("date_joined")
+  
+  // Auth extensions for signup and role-based login
+  loginId               String    @unique @map("login_id") @db.VarChar(50) // Unique member/admin/librarian ID
+  accountType           String    @map("account_type") @db.VarChar(20) // "ADMIN" | "LIBRARIAN" | "MEMBER"
+  
+  lastLoginAt           DateTime? @map("last_login_at")
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updatedAt             DateTime  @updatedAt @map("updated_at")
+  
+  // Relationships
+  userRoles             UserRole[]
+  notifications         Notification[]
+  member                Member?
+  systemLogs            SystemLog[]
+
+  @@index([loginId])
+  @@index([email])
+  @@index([accountType])
+  @@map("users")
+}
+
+model UserRole {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  roleId    Int      @map("role_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@index([userId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+// ========================================
+// MEMBERS (Students/Staff)
+// ========================================
+
+model Member {
+  id                 Int      @id @default(autoincrement())
+  userId             Int      @unique @map("user_id")
+  studentOrStaffId   String   @unique @map("student_or_staff_id") @db.VarChar(50)
+  maxBorrowedBooks   Int      @default(5) @map("max_borrowed_books")
+  department         String?  @db.VarChar(100)
+  phoneNumber        String?  @map("phone_number") @db.VarChar(20)
+  address            String?  @db.Text
+  profilePictureUrl  String?  @map("profile_picture_url") @db.VarChar(500)
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+  
+  user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  loans              Loan[]
+  reservations       Reservation[]
+  holds              Hold[]
+  fines              Fine[]
+
+  @@index([userId])
+  @@index([studentOrStaffId])
+  @@map("members")
+}
+
+// ========================================
+// BOOKS & COPIES
+// ========================================
+
+model Book {
+  id             Int           @id @default(autoincrement())
+  title          String        @db.VarChar(500)
+  author         String        @db.VarChar(255)
+  isbn           String        @unique @db.VarChar(20)
+  publishedYear  Int?          @map("published_year")
+  category       String        @db.VarChar(100)
+  publisher      String?       @db.VarChar(255)
+  description    String?       @db.Text
+  coverImageUrl  String?       @map("cover_image_url") @db.VarChar(500)
+  bookType       String        @default("physical") @map("book_type") @db.VarChar(20) // "physical" or "online"
+  pdfUrl         String?       @map("pdf_url") @db.VarChar(500) // Path to uploaded PDF for online books
+  pdfFileName    String?       @map("pdf_file_name") @db.VarChar(255) // Original PDF filename
+  pdfFileSize    BigInt?       @map("pdf_file_size") // PDF file size in bytes
+  downloadCount  Int           @default(0) @map("download_count") // Track downloads for online books
+  totalCopies    Int           @default(0) @map("total_copies") // For physical books only
+  availableCopies Int          @default(0) @map("available_copies") // For physical books only
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+  
+  bookCopies     BookCopy[]
+  reservations   Reservation[]
+
+  @@index([title])
+  @@index([author])
+  @@index([isbn])
+  @@index([category])
+  @@index([bookType])
+  @@map("books")
+}
+
+model BookCopy {
+  id         Int      @id @default(autoincrement())
+  bookId     Int      @map("book_id")
+  barcode    String   @unique @db.VarChar(100)
+  rfidTag    String?  @unique @map("rfid_tag") @db.VarChar(100)
+  condition  String   @default("good") @db.VarChar(50) // "new", "good", "fair", "damaged", "lost"
+  status     String   @default("available") @db.VarChar(50) // "available", "on_loan", "reserved", "lost", "maintenance"
+  location   String?  @db.VarChar(100) // Shelf/room location
+  notes      String?  @db.Text
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  
+  book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  loans      Loan[]
+
+  @@index([bookId])
+  @@index([status])
+  @@index([barcode])
+  @@map("book_copies")
+}
+
+// ========================================
+// LOANS
+// ========================================
+
+model Loan {
+  id              Int       @id @default(autoincrement())
+  memberId        Int       @map("member_id")
+  bookCopyId      Int       @map("book_copy_id")
+  borrowDatetime  DateTime  @default(now()) @map("borrow_datetime")
+  dueDatetime     DateTime  @map("due_datetime")
+  returnDatetime  DateTime? @map("return_datetime")
+  status          String    @default("ongoing") @db.VarChar(50) // "ongoing", "returned", "overdue", "lost"
+  renewalCount    Int       @default(0) @map("renewal_count")
+  notes           String?   @db.Text
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  
+  member          Member             @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  bookCopy        BookCopy           @relation(fields: [bookCopyId], references: [id], onDelete: Restrict)
+  holds           Hold[]
+  fines           Fine[]
+
+  @@index([memberId])
+  @@index([bookCopyId])
+  @@index([status])
+  @@index([dueDatetime])
+  @@map("loans")
+}
+
+// ========================================
+// RESERVATIONS
+// ========================================
+
+model Reservation {
+  id         Int      @id @default(autoincrement())
+  memberId   Int      @map("member_id")
+  bookId     Int      @map("book_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  expiresAt  DateTime @map("expires_at")
+  status     String   @default("active") @db.VarChar(50) // "active", "fulfilled", "expired", "cancelled"
+  notes      String?  @db.Text
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  
+  member     Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@index([memberId])
+  @@index([bookId])
+  @@index([status])
+  @@index([expiresAt])
+  @@map("reservations")
+}
+
+// ========================================
+// NOTIFICATIONS
+// ========================================
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  type      String   @db.VarChar(100) // "LOAN_CONFIRMATION", "DUE_REMINDER", "OVERDUE_WARNING", "HOLD_PLACED", "FINE_CHARGED", "ADMIN_MESSAGE", etc.
+  channel   String   @db.VarChar(50) // "email", "sms", "in_app"
+  title     String   @db.VarChar(255) // Notification title
+  message   String   @db.Text // Notification message body
+  payload   String?  @db.Text // Additional JSON data (loanId, bookId, etc.)
+  priority  String   @default("normal") @db.VarChar(20) // "low", "normal", "high", "urgent"
+  sentAt    DateTime @default(now()) @map("sent_at")
+  status    String   @default("pending") @db.VarChar(50) // "pending", "sent", "failed"
+  readAt    DateTime? @map("read_at") // For in-app notifications
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([type])
+  @@index([status])
+  @@index([sentAt])
+  @@index([readAt])
+  @@map("notifications")
+}
+
+// ========================================
+// HOLDS (Member Account Restrictions)
+// ========================================
+
+model Hold {
+  id          Int       @id @default(autoincrement())
+  memberId    Int       @map("member_id")
+  loanId      Int?      @map("loan_id") // Link to overdue loan if applicable
+  reason      String    @db.VarChar(500) // "Overdue book", "Unpaid fine", "Admin action", etc.
+  placedBy    Int       @map("placed_by") // User ID of admin who placed hold
+  placedAt    DateTime  @default(now()) @map("placed_at")
+  removedAt   DateTime? @map("removed_at")
+  removedBy   Int?      @map("removed_by") // User ID of admin who removed hold
+  status      String    @default("active") @db.VarChar(50) // "active", "removed", "expired"
+  notes       String?   @db.Text
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  
+  member      Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  loan        Loan?     @relation(fields: [loanId], references: [id], onDelete: SetNull)
+
+  @@index([memberId])
+  @@index([loanId])
+  @@index([status])
+  @@index([placedAt])
+  @@map("holds")
+}
+
+// ========================================
+// FINES (Penalty Charges)
+// ========================================
+
+model Fine {
+  id          Int       @id @default(autoincrement())
+  memberId    Int       @map("member_id")
+  loanId      Int?      @map("loan_id") // Link to overdue loan if applicable
+  amount      Decimal   @db.Decimal(10, 2)
+  currency    String    @default("USD") @db.VarChar(10)
+  reason      String    @db.VarChar(500) // "Overdue fine (X days)", "Lost book", "Damaged book", etc.
+  chargedBy   Int       @map("charged_by") // User ID of admin who charged fine
+  chargedAt   DateTime  @default(now()) @map("charged_at")
+  paidAt      DateTime? @map("paid_at")
+  paidAmount  Decimal?  @map("paid_amount") @db.Decimal(10, 2)
+  status      String    @default("unpaid") @db.VarChar(50) // "unpaid", "paid", "partially_paid", "waived"
+  waivedBy    Int?      @map("waived_by") // User ID of admin who waived fine
+  waivedAt    DateTime? @map("waived_at")
+  notes       String?   @db.Text
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  
+  member      Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  loan        Loan?     @relation(fields: [loanId], references: [id], onDelete: SetNull)
+
+  @@index([memberId])
+  @@index([loanId])
+  @@index([status])
+  @@index([chargedAt])
+  @@map("fines")
+}
+
+// ========================================
+// SYSTEM LOG (Audit Trail)
+// ========================================
+
+model SystemLog {
+  id           Int         @id @default(autoincrement())
+  userId       Int?        @map("user_id") // Nullable for system-initiated actions
+  level        String      @db.VarChar(20) // "INFO", "WARN", "ERROR", "DEBUG"
+  action       String      @db.VarChar(100) // "LOGIN", "CREATE_LOAN", "UPDATE_BOOK", etc.
+  details      String      @db.Text // JSON or descriptive text
+  ipAddress    String?     @map("ip_address") @db.VarChar(45)
+  userAgent    String?     @map("user_agent") @db.VarChar(500)
+  createdAt    DateTime    @default(now()) @map("created_at")
+  
+  user         User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([level])
+  @@index([action])
+  @@index([createdAt])
+  @@map("system_logs")
+}

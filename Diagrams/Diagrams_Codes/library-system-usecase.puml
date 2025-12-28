@@ -1,0 +1,68 @@
+@startuml
+
+title Polybookshop Library System - Use Cases
+
+actor Member
+actor Librarian  
+actor Admin
+actor "Email Service" as Email
+
+usecase "Sign Up" as UC1
+usecase "Login" as UC2
+usecase "Manage Profile" as UC3
+usecase "Browse Books" as UC4
+usecase "Search Books" as UC5
+usecase "Add/Edit Books" as UC6
+usecase "Manage Copies" as UC7
+usecase "Borrow Books" as UC8
+usecase "Return Books" as UC9
+usecase "Renew Loans" as UC10
+usecase "View My Loans" as UC11
+usecase "View All Loans" as UC12
+usecase "View Fines" as UC13
+usecase "Pay Fines" as UC14
+usecase "Charge Fines" as UC15
+usecase "Place Hold" as UC16
+usecase "Remove Hold" as UC17
+usecase "View Members" as UC18
+usecase "Send Notifications" as UC19
+usecase "System Logs" as UC20
+
+Member --> UC1
+Member --> UC2
+Member --> UC3
+Member --> UC4
+Member --> UC5
+Member --> UC8
+Member --> UC9
+Member --> UC10
+Member --> UC11
+Member --> UC13
+Member --> UC14
+
+Librarian --> UC2
+Librarian --> UC4
+Librarian --> UC5
+Librarian --> UC6
+Librarian --> UC7
+Librarian --> UC12
+
+Admin --> UC2
+Admin --> UC4
+Admin --> UC5
+Admin --> UC6
+Admin --> UC7
+Admin --> UC12
+Admin --> UC15
+Admin --> UC16
+Admin --> UC17
+Admin --> UC18
+Admin --> UC19
+Admin --> UC20
+
+UC8 ..> Email
+UC9 ..> Email
+UC15 ..> Email
+UC16 ..> Email
+
+@enduml

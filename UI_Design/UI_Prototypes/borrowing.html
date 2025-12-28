@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowing & Returns - Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span>
+                <span>LibraryMS</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="borrowing.html" class="active">Borrowing</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+            <div class="user-menu">
+                <span style="color: var(--gray-700); font-weight: 500;">Staff User</span>
+                <div class="user-avatar">SU</div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <h1 style="margin-bottom: 2rem; color: var(--gray-900);">Borrowing & Returns</h1>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-2">
+            <!-- Check Out Book -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📤 Check Out Book</h2>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Scan Member ID / Student ID</label>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="form-input" placeholder="Scan barcode or enter manually...">
+                    </div>
+                </div>
+
+                <!-- Member Info Display -->
+                <div style="background: var(--gray-50); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="user-avatar" style="width: 50px; height: 50px; font-size: 1.25rem;">JS</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 1.125rem;">John Smith</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">Student ID: STU20231547</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">Books Borrowed: 2/5</div>
+                        </div>
+                        <span class="badge badge-success">Active</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Scan Book Barcode / RFID</label>
+                    <div class="search-box">
+                        <span class="search-icon">📖</span>
+                        <input type="text" class="form-input" placeholder="Scan book barcode or RFID tag...">
+                    </div>
+                </div>
+
+                <!-- Book Info Display -->
+                <div style="background: var(--gray-50); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="width: 60px; height: 85px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">📖</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 1.125rem; margin-bottom: 0.25rem;">The Great Gatsby</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">F. Scott Fitzgerald</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">ISBN: 978-0-7432-7356-5</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">Copy ID: BK001-C05</div>
+                            <div style="margin-top: 0.5rem;">
+                                <span class="badge badge-success">Available</span>
+                                <span class="badge badge-info">Fiction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Due Date</label>
+                    <input type="date" class="form-input" value="2025-12-06">
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%;">
+                    <span>✓</span>
+                    <span>Complete Check Out</span>
+                </button>
+            </div>
+
+            <!-- Return Book -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📥 Return Book</h2>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Scan Book Barcode / RFID</label>
+                    <div class="search-box">
+                        <span class="search-icon">📖</span>
+                        <input type="text" class="form-input" placeholder="Scan book barcode or RFID tag...">
+                    </div>
+                </div>
+
+                <!-- Loan Info Display -->
+                <div style="background: var(--gray-50); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="width: 60px; height: 85px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">📖</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 1.125rem; margin-bottom: 0.25rem;">To Kill a Mockingbird</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">Harper Lee</div>
+                            <div style="color: var(--gray-600); font-size: 0.875rem;">Copy ID: BK002-C03</div>
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid var(--gray-200); padding-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--gray-600);">Borrowed By:</span>
+                            <span style="font-weight: 600;">Sarah Johnson</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--gray-600);">Borrowed Date:</span>
+                            <span>Nov 8, 2025</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--gray-600);">Due Date:</span>
+                            <span style="color: var(--warning-color); font-weight: 600;">Nov 22, 2025 (Today)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--gray-600);">Days Borrowed:</span>
+                            <span>14 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Book Condition</label>
+                    <select class="form-select">
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Fair</option>
+                        <option>Poor</option>
+                        <option>Damaged</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Notes (Optional)</label>
+                    <textarea class="form-input" rows="3" placeholder="Any notes about the book condition or return..."></textarea>
+                </div>
+
+                <button class="btn btn-success" style="width: 100%;">
+                    <span>✓</span>
+                    <span>Complete Return</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Active Loans -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Active Loans (3,613)</h2>
+                <div style="display: flex; gap: 1rem;">
+                    <div class="search-box" style="width: 300px;">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="form-input" placeholder="Search loans...">
+                    </div>
+                    <select class="form-select" style="width: 200px;">
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Due Soon</option>
+                        <option>Overdue</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Loan ID</th>
+                            <th>Member</th>
+                            <th>Book</th>
+                            <th>Copy ID</th>
+                            <th>Borrowed Date</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#L-2401</td>
+                            <td>
+                                <div style="font-weight: 600;">John Smith</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">STU20231547</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">The Great Gatsby</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">F. Scott Fitzgerald</div>
+                            </td>
+                            <td>BK001-C05</td>
+                            <td>Nov 16, 2025</td>
+                            <td>Nov 30, 2025</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Extend Due Date">📅</button>
+                                    <button class="icon-btn" title="Process Return">📥</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#L-2400</td>
+                            <td>
+                                <div style="font-weight: 600;">Sarah Johnson</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">STU20231892</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">To Kill a Mockingbird</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Harper Lee</div>
+                            </td>
+                            <td>BK002-C03</td>
+                            <td>Nov 8, 2025</td>
+                            <td>Nov 22, 2025</td>
+                            <td><span class="badge badge-warning">Due Today</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Extend Due Date">📅</button>
+                                    <button class="icon-btn" title="Process Return">📥</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#L-2399</td>
+                            <td>
+                                <div style="font-weight: 600;">Mike Davis</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">STAFF-456</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">1984</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">George Orwell</div>
+                            </td>
+                            <td>BK003-C07</td>
+                            <td>Nov 5, 2025</td>
+                            <td>Nov 19, 2025</td>
+                            <td><span class="badge badge-danger">Overdue (3 days)</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Send Reminder">📧</button>
+                                    <button class="icon-btn" title="Process Return">📥</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#L-2398</td>
+                            <td>
+                                <div style="font-weight: 600;">Emily Brown</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">STU20232103</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">Pride and Prejudice</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">Jane Austen</div>
+                            </td>
+                            <td>BK004-C02</td>
+                            <td>Nov 20, 2025</td>
+                            <td>Dec 4, 2025</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Extend Due Date">📅</button>
+                                    <button class="icon-btn" title="Process Return">📥</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#L-2397</td>
+                            <td>
+                                <div style="font-weight: 600;">David Wilson</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">STU20231675</div>
+                            </td>
+                            <td>
+                                <div style="font-weight: 600;">The Catcher in the Rye</div>
+                                <div style="font-size: 0.875rem; color: var(--gray-600);">J.D. Salinger</div>
+                            </td>
+                            <td>BK005-C01</td>
+                            <td>Nov 18, 2025</td>
+                            <td>Dec 2, 2025</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Details">👁️</button>
+                                    <button class="icon-btn" title="Extend Due Date">📅</button>
+                                    <button class="icon-btn" title="Process Return">📥</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+                <div style="color: var(--gray-600);">Showing 1-5 of 3,613 active loans</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary btn-sm">Previous</button>
+                    <button class="btn btn-primary btn-sm">1</button>
+                    <button class="btn btn-secondary btn-sm">2</button>
+                    <button class="btn btn-secondary btn-sm">3</button>
+                    <button class="btn btn-secondary btn-sm">...</button>
+                    <button class="btn btn-secondary btn-sm">723</button>
+                    <button class="btn btn-secondary btn-sm">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

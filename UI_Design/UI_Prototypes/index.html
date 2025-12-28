@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - UI Prototypes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="login-card" style="max-width: 900px; padding: 4rem;">
+            <div class="login-header">
+                <div class="logo" style="justify-content: center; font-size: 2.5rem; margin-bottom: 1rem;">
+                    <span class="logo-icon" style="font-size: 4rem;">📚</span>
+                    <span>LibraryMS</span>
+                </div>
+                <h1 class="login-title" style="font-size: 2.5rem;">UI Prototypes</h1>
+                <p class="login-subtitle" style="font-size: 1.125rem;">Explore the library management system interface</p>
+            </div>
+
+            <div style="margin-top: 3rem;">
+                <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 2rem;">
+                    <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--gray-900);">
+                        📖 About This Project
+                    </h2>
+                    <p style="color: var(--gray-700); line-height: 1.8;">
+                        This is a comprehensive library management system designed to handle book inventory, member management, 
+                        borrowing operations, and administrative tasks. The system features RFID/barcode scanning, automated 
+                        notifications, payment processing, and detailed reporting capabilities.
+                    </p>
+                </div>
+
+                <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--gray-900);">
+                    🎨 Available Prototypes
+                </h2>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                    <a href="login.html" class="card" style="text-decoration: none; color: inherit; transition: all 0.3s;">
+                        <div style="display: flex; gap: 1.5rem; align-items: start;">
+                            <div style="font-size: 3rem;">🔐</div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-900);">
+                                    Login Page
+                                </h3>
+                                <p style="color: var(--gray-600); font-size: 0.875rem;">
+                                    Authentication interface for staff and admin users with role-based access
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="dashboard.html" class="card" style="text-decoration: none; color: inherit; transition: all 0.3s;">
+                        <div style="display: flex; gap: 1.5rem; align-items: start;">
+                            <div style="font-size: 3rem;">📊</div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-900);">
+                                    Dashboard
+                                </h3>
+                                <p style="color: var(--gray-600); font-size: 0.875rem;">
+                                    Main overview with key metrics, recent activity, and quick actions
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="books.html" class="card" style="text-decoration: none; color: inherit; transition: all 0.3s;">
+                        <div style="display: flex; gap: 1.5rem; align-items: start;">
+                            <div style="font-size: 3rem;">📚</div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-900);">
+                                    Book Management
+                                </h3>
+                                <p style="color: var(--gray-600); font-size: 0.875rem;">
+                                    Search, view, and manage the entire book inventory with detailed information
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="borrowing.html" class="card" style="text-decoration: none; color: inherit; transition: all 0.3s;">
+                        <div style="display: flex; gap: 1.5rem; align-items: start;">
+                            <div style="font-size: 3rem;">📖</div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-900);">
+                                    Borrowing & Returns
+                                </h3>
+                                <p style="color: var(--gray-600); font-size: 0.875rem;">
+                                    Process checkouts and returns with barcode/RFID scanning support
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="members.html" class="card" style="text-decoration: none; color: inherit; transition: all 0.3s;">
+                        <div style="display: flex; gap: 1.5rem; align-items: start;">
+                            <div style="font-size: 3rem;">👥</div>
+                            <div style="flex: 1;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-900);">
+                                    Member Management
+                                </h3>
+                                <p style="color: var(--gray-600); font-size: 0.875rem;">
+                                    View and manage library members, students, and staff accounts
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--gray-900);">
+                        🎯 Key Features
+                    </h3>
+                    <ul style="color: var(--gray-700); line-height: 2; margin-left: 1.5rem;">
+                        <li>📊 Real-time dashboard with statistics and notifications</li>
+                        <li>📚 Comprehensive book inventory management</li>
+                        <li>🔍 Advanced search and filtering capabilities</li>
+                        <li>📖 RFID/Barcode scanning for quick operations</li>
+                        <li>👥 Member profiles with borrowing history</li>
+                        <li>💳 Payment transaction processing</li>
+                        <li>📧 Automated notification system</li>
+                        <li>📈 Reporting and analytics tools</li>
+                        <li>🔒 Role-based access control</li>
+                        <li>☁️ Cloud storage integration</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center;">
+                    <a href="dashboard.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">
+                        <span>🚀</span>
+                        <span>Start Exploring</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="position: absolute; bottom: 2rem; text-align: center; width: 100%; color: white; font-size: 0.875rem;">
+            <p>© 2025 Library Management System - Professional UI Prototypes</p>
+        </div>
+    </div>
+
+    <style>
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+    </style>
+</body>
+</html>

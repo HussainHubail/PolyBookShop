@@ -1,0 +1,159 @@
+
+Thesis Title
+
+
+
+
+by
+
+Add you name here
+
+
+ 
+
+
+
+
+A Thesis Submitted in
+
+ (Partial) Fulfillment of the
+
+Requirements for the Degree of
+
+
+
+
+Bachelor of Science 
+
+in Information & Communication Technology 
+
+
+
+
+at
+
+Bahrain Polytechnic
+
+June 2021
+
+
+
+
+Title
+
+
+Thesis Title goes here
+
+Copyright
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(c) 2012
+
+Add your name here
+
+All rights reserved
+
+Declaration
+I hereby declare that this submission is my own work and that, to the best of my knowledge and belief, it contains no material previously published or written by another person nor material which to a substantial extent has been accepted for the award of any other degree or diploma of the university or other institute of higher learning, except where due acknowledgment has been made in the text. 
+
+
+............................. / ....................................................... / .....................
+signature	  			name				 	date
+
+
+Approval Signatures
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+APPROVED FOR THE ICT PROGRAMME
+
+
+
+________________________________________________	
+	(thesis supervisor), 	Thesis Supervisor		Date
+
+
+
+________________________________________________	
+	(writing tutor), 	Technical Writing Tutor	Date
+
+
+
+Abstract
+The abstract should present a brief summary of the project document, stating the purpose, the methodology followed, the results, and any conclusions. Your abstract should be around 150 and 200 words. However, do not worry about the word count; instead make sure that your abstract briefly captures the information described above and allows the reader a first understanding about the project document. Nobody will complain to you about the total number of words, but your supervisor or your client will raise a concern about your abstract if it does not communicate all the necessary information. Leave the abstract as the last item. Write it after you finish the rest of your report, so that you have a solid understanding about the project.
+
+Acknowledgements
+You should add acknowledgements to any person you believe gave you support during this project (supervisor, clients, family, friends, etc).
+
+Table of Contents
+Title	I
+Copyright	III
+Table of Contents	VIII
+1.	Introduction	1
+
+
+List of Figures
+Add a list of figures here!!
+
+
+
+
+1. Introduction
+
+
+
+1
+
+

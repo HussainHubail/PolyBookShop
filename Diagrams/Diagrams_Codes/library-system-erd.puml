@@ -1,0 +1,130 @@
+@startuml
+
+title Polybookshop Database Schema (12 Tables - 3NF)
+
+class USER {
+    + id : int
+    --
+    username : string
+    email : string
+    password_hash : string
+    login_id : string
+    account_type : string
+    is_active : boolean
+}
+
+class ROLE {
+    + id : int
+    --
+    name : string
+    description : string
+}
+
+class USER_ROLE {
+    + id : int
+    --
+    user_id : int
+    role_id : int
+}
+
+class MEMBER {
+    + id : int
+    --
+    user_id : int
+    student_staff_id : string
+    department : string
+    phone_number : string
+    max_borrowed_books : int
+}
+
+class BOOK {
+    + id : int
+    --
+    title : string
+    author : string
+    isbn : string
+    category : string
+    book_type : string
+    total_copies : int
+}
+
+class BOOK_COPY {
+    + id : int
+    --
+    book_id : int
+    barcode : string
+    status : string
+    condition : string
+    location : string
+}
+
+class LOAN {
+    + id : int
+    --
+    member_id : int
+    book_copy_id : int
+    borrow_datetime : datetime
+    due_datetime : datetime
+    status : string
+}
+
+class RESERVATION {
+    + id : int
+    --
+    member_id : int
+    book_id : int
+    reserved_at : datetime
+    expires_at : datetime
+}
+
+class HOLD {
+    + id : int
+    --
+    member_id : int
+    reason : string
+    placed_by : int
+    status : string
+}
+
+class FINE {
+    + id : int
+    --
+    member_id : int
+    loan_id : int
+    amount : decimal
+    reason : string
+    status : string
+}
+
+class NOTIFICATION {
+    + id : int
+    --
+    user_id : int
+    type : string
+    message : text
+    is_read : boolean
+}
+
+class SYSTEM_LOG {
+    + id : int
+    --
+    user_id : int
+    action : string
+    details : text
+}
+
+USER "1" -- "0..*" USER_ROLE
+ROLE "1" -- "0..*" USER_ROLE
+USER "1" -- "0..1" MEMBER
+BOOK "1" -- "0..*" BOOK_COPY
+MEMBER "1" -- "0..*" LOAN
+BOOK_COPY "1" -- "0..*" LOAN
+MEMBER "1" -- "0..*" RESERVATION
+BOOK "1" -- "0..*" RESERVATION
+MEMBER "1" -- "0..*" HOLD
+MEMBER "1" -- "0..*" FINE
+LOAN "1" -- "0..1" FINE
+USER "1" -- "0..*" NOTIFICATION
+USER "1" -- "0..*" SYSTEM_LOG
+
+@enduml

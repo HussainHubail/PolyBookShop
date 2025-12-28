@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Management - Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span>
+                <span>LibraryMS</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="borrowing.html">Borrowing</a></li>
+                <li><a href="members.html" class="active">Members</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+            <div class="user-menu">
+                <span style="color: var(--gray-700); font-weight: 500;">Admin User</span>
+                <div class="user-avatar">AU</div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1 style="color: var(--gray-900);">Library Members</h1>
+            <button class="btn btn-primary">
+                <span>➕</span>
+                <span>Register New Member</span>
+            </button>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Total Members</div>
+                        <div class="stat-value">4,892</div>
+                    </div>
+                    <div class="stat-icon blue">👥</div>
+                </div>
+                <div class="stat-change positive">↑ 89 new this month</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Active Members</div>
+                        <div class="stat-value">4,512</div>
+                    </div>
+                    <div class="stat-icon green">✓</div>
+                </div>
+                <div class="stat-change">92% active rate</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Students</div>
+                        <div class="stat-value">3,847</div>
+                    </div>
+                    <div class="stat-icon blue">🎓</div>
+                </div>
+                <div class="stat-change">79% of members</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-label">Staff Members</div>
+                        <div class="stat-value">1,045</div>
+                    </div>
+                    <div class="stat-icon yellow">👔</div>
+                </div>
+                <div class="stat-change">21% of members</div>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="card">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
+                <div class="form-group" style="margin: 0;">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="form-input" placeholder="Search by name, ID, email...">
+                    </div>
+                </div>
+                <div class="form-group" style="margin: 0;">
+                    <select class="form-select">
+                        <option>All Types</option>
+                        <option>Students</option>
+                        <option>Staff</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin: 0;">
+                    <select class="form-select">
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Suspended</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Members Table -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">All Members (4,892)</h2>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-secondary btn-sm">
+                        <span>📥</span>
+                        <span>Import</span>
+                    </button>
+                    <button class="btn btn-secondary btn-sm">
+                        <span>📤</span>
+                        <span>Export</span>
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Books Borrowed</th>
+                            <th>Join Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px;">JS</div>
+                                    <div>
+                                        <div style="font-weight: 600;">John Smith</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">Computer Science</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STU20231547</td>
+                            <td><span class="badge badge-info">Student</span></td>
+                            <td>john.smith@university.edu</td>
+                            <td>+1 (555) 0123</td>
+                            <td>2/5</td>
+                            <td>Jan 15, 2023</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; background: var(--secondary-color);">SJ</div>
+                                    <div>
+                                        <div style="font-weight: 600;">Sarah Johnson</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">English Literature</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STU20231892</td>
+                            <td><span class="badge badge-info">Student</span></td>
+                            <td>sarah.j@university.edu</td>
+                            <td>+1 (555) 0124</td>
+                            <td>4/5</td>
+                            <td>Feb 3, 2023</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; background: var(--warning-color);">MD</div>
+                                    <div>
+                                        <div style="font-weight: 600;">Mike Davis</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">Library Staff</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STAFF-456</td>
+                            <td><span class="badge badge-gray">Staff</span></td>
+                            <td>m.davis@library.edu</td>
+                            <td>+1 (555) 0125</td>
+                            <td>1/10</td>
+                            <td>Sep 12, 2022</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; background: #f59e0b;">EB</div>
+                                    <div>
+                                        <div style="font-weight: 600;">Emily Brown</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">Biology</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STU20232103</td>
+                            <td><span class="badge badge-info">Student</span></td>
+                            <td>emily.b@university.edu</td>
+                            <td>+1 (555) 0126</td>
+                            <td>3/5</td>
+                            <td>Mar 20, 2023</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; background: #8b5cf6;">DW</div>
+                                    <div>
+                                        <div style="font-weight: 600;">David Wilson</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">Mathematics</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STU20231675</td>
+                            <td><span class="badge badge-info">Student</span></td>
+                            <td>d.wilson@university.edu</td>
+                            <td>+1 (555) 0127</td>
+                            <td>1/5</td>
+                            <td>Jan 28, 2023</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; background: #ec4899;">LT</div>
+                                    <div>
+                                        <div style="font-weight: 600;">Lisa Thompson</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">History</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STU20232456</td>
+                            <td><span class="badge badge-info">Student</span></td>
+                            <td>lisa.t@university.edu</td>
+                            <td>+1 (555) 0128</td>
+                            <td>5/5</td>
+                            <td>Apr 5, 2023</td>
+                            <td><span class="badge badge-warning">At Limit</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; background: var(--gray-600);">RM</div>
+                                    <div>
+                                        <div style="font-weight: 600;">Robert Miller</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">Physics</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STU20220934</td>
+                            <td><span class="badge badge-info">Student</span></td>
+                            <td>r.miller@university.edu</td>
+                            <td>+1 (555) 0129</td>
+                            <td>0/5</td>
+                            <td>Aug 15, 2022</td>
+                            <td><span class="badge badge-gray">Inactive</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div class="user-avatar" style="width: 40px; height: 40px; background: #14b8a6;">AC</div>
+                                    <div>
+                                        <div style="font-weight: 600;">Amanda Clark</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray-600);">Administration</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>STAFF-789</td>
+                            <td><span class="badge badge-gray">Staff</span></td>
+                            <td>a.clark@library.edu</td>
+                            <td>+1 (555) 0130</td>
+                            <td>3/10</td>
+                            <td>Jun 1, 2022</td>
+                            <td><span class="badge badge-success">Active</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" title="View Profile">👁️</button>
+                                    <button class="icon-btn" title="Edit">✏️</button>
+                                    <button class="icon-btn" title="History">📋</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+                <div style="color: var(--gray-600);">Showing 1-8 of 4,892 members</div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary btn-sm">Previous</button>
+                    <button class="btn btn-primary btn-sm">1</button>
+                    <button class="btn btn-secondary btn-sm">2</button>
+                    <button class="btn btn-secondary btn-sm">3</button>
+                    <button class="btn btn-secondary btn-sm">...</button>
+                    <button class="btn btn-secondary btn-sm">612</button>
+                    <button class="btn btn-secondary btn-sm">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
