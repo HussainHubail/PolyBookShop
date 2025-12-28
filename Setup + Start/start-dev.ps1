@@ -18,6 +18,30 @@ try {
     exit 1
 }
 
+# Check Backend .env
+$backendEnv = Join-Path $rootDir "Backend/.env"
+if (-not (Test-Path $backendEnv)) {
+    Write-Host "Backend/.env is missing. Copy Backend/.env.example and set DATABASE_URL." -ForegroundColor Red
+    exit 1
+}
+
+# Parse DATABASE_URL for connectivity check
+$dbLine = Get-Content $backendEnv | Where-Object { $_ -match '^DATABASE_URL=' } | Select-Object -First 1
+if (-not $dbLine) {
+    Write-Host "DATABASE_URL not found in Backend/.env." -ForegroundColor Red
+    exit 1
+}
+$dbUrl = $dbLine -replace '^DATABASE_URL="?','' -replace '"?$',''
+$dbHost = $null
+$dbPort = 5432
+try {
+    $uri = [System.Uri]::new($dbUrl)
+    $dbHost = $uri.Host
+    if ($uri.Port -gt 0) { $dbPort = $uri.Port }
+} catch {
+    Write-Host "Could not parse DATABASE_URL. Check Backend/.env." -ForegroundColor Yellow
+}
+
 # Check if dependencies are installed
 $backendNodeModules = Join-Path $rootDir "Backend\node_modules"
 $frontendNodeModules = Join-Path $rootDir "Frontend\node_modules"
@@ -42,6 +66,17 @@ if (-not (Test-Path $frontendNodeModules)) {
     }
 }
 
+# Verify database connectivity (best-effort)
+if ($dbHost) {
+    Write-Host "Checking database connectivity to $dbHost:$dbPort ..." -ForegroundColor Yellow
+    $dbCheck = Test-NetConnection -ComputerName $dbHost -Port $dbPort -WarningAction SilentlyContinue
+    if (-not $dbCheck.TcpTestSucceeded) {
+        Write-Host "Cannot reach database at $dbHost:$dbPort. Start Postgres or update DATABASE_URL." -ForegroundColor Red
+        exit 1
+    }
+    Write-Host "Database port reachable." -ForegroundColor Green
+}
+
 # Generate Prisma Client
 Write-Host ""
 Write-Host "Generating Prisma Client..." -ForegroundColor Yellow
@@ -52,6 +87,15 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 Write-Host "Prisma Client generated successfully!" -ForegroundColor Green
+
+# Apply migrations (deploy) to ensure schema exists
+Write-Host "Applying Prisma migrations (deploy)..." -ForegroundColor Yellow
+npx prisma migrate deploy
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Prisma migrations failed! Check DATABASE_URL and Postgres." -ForegroundColor Red
+    exit 1
+}
+Write-Host "Prisma migrations applied." -ForegroundColor Green
 
 Write-Host ""
 Write-Host "========================================================" -ForegroundColor Cyan
